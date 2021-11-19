@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UserMaintenance.Entities;
+using System.IO;
 
 namespace UserMaintenance
 {
@@ -43,7 +44,15 @@ namespace UserMaintenance
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            SaveFileDialog sfd = new SaveFileDialog();
+            if(sfd.ShowDialog()==DialogResult.OK)
+            {
+                using (StreamWriter sw=new StreamWriter(sfd.FileName))
+                {
+                    foreach (User item in users)
+                        sw.WriteLine(item.ID + ";" + item.FullName);
+                }
+            }
         }
     }
 }
