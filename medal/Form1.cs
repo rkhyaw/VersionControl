@@ -22,6 +22,18 @@ namespace medal
             Betolt("Summer_olympic_Medals.csv");
 
             ComboFeltolt();
+
+            Osztalyozas();
+
+            dataGridView1.DataSource = results;
+        }
+
+        private void Osztalyozas()
+        {
+            foreach (OlympicResult item in results)
+            {
+                item.Position = Helyezes(item);
+            }
         }
 
         int Helyezes(OlympicResult res)
