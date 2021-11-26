@@ -7,11 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using medal.Entities;
 
 namespace medal
 {
     public partial class Form1 : Form
     {
+        List<OlympicResult> results = new List<OlympicResult>();
         public Form1()
         {
             InitializeComponent();
