@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace progtervmintak.Entities
 {
-    class Ball : Label
+    public class Ball : Label
     {
         public Ball()
         {
@@ -24,7 +24,7 @@ namespace progtervmintak.Entities
 
         protected void DrawImage(Graphics graphics)
         {
-            graphics.FillEllipse(new SolidBrush(Color.Blue), 0, 0, Width, Height);
+            graphics.FillEllipse(new SolidBrush(Color.Red), -50, 0, Width, Height);
         }
 
         public void MoveBall()
