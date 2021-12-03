@@ -22,7 +22,7 @@ namespace progtervmintak.Entities
             DrawImage(e.Graphics);
         }
 
-        private void DrawImage(Graphics graphics)
+        protected void DrawImage(Graphics graphics)
         {
             graphics.FillEllipse(new SolidBrush(Color.Blue), 0, 0, Width, Height);
         }
