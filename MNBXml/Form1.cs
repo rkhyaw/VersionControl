@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using MNBXml.Entities;
 using MNBXml.MBNServiceReference;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MNBXml
 {
@@ -21,7 +22,25 @@ namespace MNBXml
         {
             InitializeComponent();            
             loadXML(getRates());
+            chartKeszites();
             dataGridView1.DataSource = _rates;
+        }
+
+        private void chartKeszites()
+        {
+            chartRateData.DataSource = _rates;
+            var sorozatok=chartRateData.Series[0];
+            sorozatok.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            sorozatok.XValueMember = "Date";
+            sorozatok.YValueMembers = "Value";
+
+            var jelmagyarazat=chartRateData.Legends[0];
+            jelmagyarazat.Enabled = false;
+
+            var diagramterulet = chartRateData.ChartAreas[0];
+            diagramterulet.AxisY.IsStartedFromZero = false;
+            diagramterulet.AxisY.MajorGrid.Enabled = false;
+            diagramterulet.AxisX.MajorGrid.Enabled = false;
         }
 
         private void loadXML(string xmlstring)
