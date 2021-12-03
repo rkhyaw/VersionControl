@@ -17,10 +17,39 @@ namespace MNBXml
     public partial class Form1 : Form
     {
         BindingList<RateData> _rates = new BindingList<RateData>();
+        BindingList<string> currencies = new BindingList<string>();
 
         public Form1()
         {
-            InitializeComponent();            
+            InitializeComponent();
+            comboBox1.DataSource = currencies;
+            RefreshData();
+        }
+
+        private string getCurrencies()
+        {
+            var mnbService = new MNBArfolyamServiceSoapClient();
+            GetCurrenciesRequestBody req = new GetCurrenciesRequestBody();
+            var resp = mnbService.GetCurrencies(req);
+            return "teszt";
+        }
+
+        private void loadCurrencyxml(string xmlstring)
+        {
+            currencies.Clear();
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(xmlstring);
+            foreach (XmlElement item in xml.DocumentElement)
+            {
+                string s = item.InnerText;
+                currencies.Add(s);
+            }
+        }
+
+        private void RefreshData()
+        {
+            if (comboBox1.SelectedItem == null) return;
+            _rates.Clear();
             loadXML(getRates());
             chartKeszites();
             dataGridView1.DataSource = _rates;
@@ -52,14 +81,18 @@ namespace MNBXml
                 RateData r = new RateData();
                 r.Date=DateTime.Parse(item.GetAttribute("date"));
                 var childElement = (XmlElement)item.ChildNodes[0];
-                r.Currency = childElement.GetAttribute("curr");
-                decimal unit = decimal.Parse(childElement.GetAttribute("unit"));
-                r.Value = decimal.Parse(childElement.InnerText);
-                if(unit!=0)
+                if (childElement != null)
                 {
-                    r.Value = r.Value / unit;
+                    r.Currency = childElement.GetAttribute("curr");
+                    decimal unit = decimal.Parse(childElement.GetAttribute("unit"));
+                    r.Value = decimal.Parse(childElement.InnerText);
+                    if (unit != 0)
+                    {
+                        r.Value = r.Value / unit;
+                    }
+
+                    _rates.Add(r);
                 }
-                _rates.Add(r);
             }
         }
 
@@ -67,11 +100,16 @@ namespace MNBXml
         {
             var mnbService = new MNBArfolyamServiceSoapClient();
             GetExchangeRatesRequestBody req = new GetExchangeRatesRequestBody();
-            req.currencyNames = "EUR";
-            req.startDate = "2020-01-01";
-            req.endDate = "2020-06-30";
+            req.currencyNames = comboBox1.SelectedItem.ToString();
+            req.startDate = tolPicker.Value.ToString("yyyy-MM-dd");
+            req.endDate = igPicker.Value.ToString("yyyy-MM-dd");
             var response = mnbService.GetExchangeRates(req);
             return response.GetExchangeRatesResult;
+        }
+
+        private void paramChanged(object sender, EventArgs e)
+        {
+            RefreshData();
         }
     }
 }
