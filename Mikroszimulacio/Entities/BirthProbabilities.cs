@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Mikroszimulacio.Entities
 {
-    class BirthProbabilities
+    public class BirthProbabilities
     {
         public int Age { get; set; }
         public int NbrOfChildren { get; set; }
