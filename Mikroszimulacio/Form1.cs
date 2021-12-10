@@ -18,10 +18,54 @@ namespace Mikroszimulacio
         List<BirthProbabilities> BirthProbabilities = new List<BirthProbabilities>();
         List<DeathProbabilities> DeathProbabilities = new List<DeathProbabilities>();
 
+        Random rng = new Random(1234);
+
         public Form1()
         {
             InitializeComponent();
             Population = GetPopulation(@"D:\temp\nép-teszt.csv");
+            BirthProbabilities = GetBirthProbabilities(@"D:\Temp\születés.csv");
+            DeathProbabilities = GetDeathProbabilities(@"D:\Temp\halál.csv");
+        }
+
+        private List<BirthProbabilities> GetBirthProbabilities(string csvpath)
+        {
+            List<BirthProbabilities> result = new List<BirthProbabilities>();
+
+            using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
+            {
+                while (!sr.EndOfStream)
+                {
+                    var line = sr.ReadLine().Split(';');
+                    result.Add(new BirthProbabilities()
+                    {
+                        Age = int.Parse(line[0]),
+                        NbrOfChildren = int.Parse(line[1]),
+                        P = double.Parse(line[2])
+                    });
+                }
+            }
+            return result;
+        }
+
+        private List<DeathProbabilities> GetDeathProbabilities(string csvpath)
+        {
+            List<DeathProbabilities> result = new List<DeathProbabilities>();
+
+            using (StreamReader sr = new StreamReader(csvpath, Encoding.Default))
+            {
+                while (!sr.EndOfStream)
+                {
+                    var line = sr.ReadLine().Split(';');
+                    result.Add(new DeathProbabilities()
+                    {
+                        Age = int.Parse(line[0]),
+                        Gender = (Gender)Enum.Parse(typeof(Gender), line[1]),
+                        P = double.Parse(line[2])
+                    });
+                }
+            }
+            return result;
         }
 
         public List<Person> GetPopulation(string csvpath)
