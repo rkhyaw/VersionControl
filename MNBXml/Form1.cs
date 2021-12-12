@@ -22,6 +22,8 @@ namespace MNBXml
         public Form1()
         {
             InitializeComponent();
+            loadCurrencyxml(getCurrencies());
+            
             comboBox1.DataSource = currencies;
             RefreshData();
         }
@@ -31,7 +33,8 @@ namespace MNBXml
             var mnbService = new MNBArfolyamServiceSoapClient();
             GetCurrenciesRequestBody req = new GetCurrenciesRequestBody();
             var resp = mnbService.GetCurrencies(req);
-            return "teszt";
+            string result = resp.GetCurrenciesResult;
+            return result;
         }
 
         private void loadCurrencyxml(string xmlstring)
@@ -39,7 +42,7 @@ namespace MNBXml
             currencies.Clear();
             XmlDocument xml = new XmlDocument();
             xml.LoadXml(xmlstring);
-            foreach (XmlElement item in xml.DocumentElement)
+            foreach (XmlElement item in xml.DocumentElement.ChildNodes[0])
             {
                 string s = item.InnerText;
                 currencies.Add(s);
