@@ -35,6 +35,7 @@
             this.btnBall = new System.Windows.Forms.Button();
             this.btnCar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.bllClr = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // mainPanel
@@ -85,11 +86,23 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Next:";
             // 
+            // bllClr
+            // 
+            this.bllClr.BackColor = System.Drawing.Color.Red;
+            this.bllClr.Location = new System.Drawing.Point(12, 41);
+            this.bllClr.Name = "bllClr";
+            this.bllClr.Size = new System.Drawing.Size(75, 23);
+            this.bllClr.TabIndex = 4;
+            this.bllClr.Text = "BallColor";
+            this.bllClr.UseVisualStyleBackColor = false;
+            this.bllClr.Click += new System.EventHandler(this.bllClr_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.bllClr);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCar);
             this.Controls.Add(this.btnBall);
@@ -109,6 +122,7 @@
         private System.Windows.Forms.Button btnBall;
         private System.Windows.Forms.Button btnCar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button bllClr;
     }
 }
 

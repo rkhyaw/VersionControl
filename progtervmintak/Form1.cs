@@ -70,12 +70,26 @@ namespace progtervmintak
 
         private void btnBall_Click(object sender, EventArgs e)
         {
-            Factory = new BallFactory();
+            Factory = new BallFactory
+            {
+                BallColor = bllClr.BackColor
+            };
         }
 
         private void btnCar_Click(object sender, EventArgs e)
         {
             Factory = new CarFactory();
+        }
+
+        private void bllClr_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            ColorDialog colorPicker = new ColorDialog();
+
+            colorPicker.Color = button.BackColor;
+            if (colorPicker.ShowDialog() != DialogResult.OK)
+                return;
+            button.BackColor = colorPicker.Color;
         }
     }
 }
