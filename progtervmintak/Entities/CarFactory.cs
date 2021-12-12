@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace progtervmintak.Entities
 {
-    public class BallFactory:iToyFactory
+    class CarFactory : iToyFactory
     {
         public Toy CreateNew()
         {
-            return new Ball();
+            throw new NotImplementedException();
         }
     }
 }
