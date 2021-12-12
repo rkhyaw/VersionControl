@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace progtervmintak.Abstractions
 {
-    interface iToyFactory
+    public interface iToyFactory
     {
         Toy CreateNew();
     }
