@@ -36,10 +36,9 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mainPanel.Location = new System.Drawing.Point(0, 0);
+            this.mainPanel.Location = new System.Drawing.Point(0, 189);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(800, 450);
+            this.mainPanel.Size = new System.Drawing.Size(800, 261);
             this.mainPanel.TabIndex = 0;
             // 
             // createTimer

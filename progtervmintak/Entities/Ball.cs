@@ -1,4 +1,5 @@
-﻿using System;
+﻿using progtervmintak.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,28 +9,12 @@ using System.Windows.Forms;
 
 namespace progtervmintak.Entities
 {
-    public class Ball : Label
+    public class Ball : Toy
     {
-        public Ball()
+        protected override void DrawImage(Graphics graphics)
         {
-            AutoSize = false;
-            Width = Height = 50;
-            Paint += Ball_Paint;
+            graphics.FillEllipse(new SolidBrush(Color.Red), 0, 0, Width, Height);
         }
 
-        private void Ball_Paint(object sender, PaintEventArgs e)
-        {
-            DrawImage(e.Graphics);
-        }
-
-        protected void DrawImage(Graphics graphics)
-        {
-            graphics.FillEllipse(new SolidBrush(Color.Red), -50, 0, Width, Height);
-        }
-
-        public void MoveBall()
-        {
-            Left += 1;
-        }
     }
 }
