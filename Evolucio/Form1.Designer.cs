@@ -28,13 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.lblGen = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // lblGen
+            // 
+            this.lblGen.AutoSize = true;
+            this.lblGen.Location = new System.Drawing.Point(169, 358);
+            this.lblGen.Name = "lblGen";
+            this.lblGen.Size = new System.Drawing.Size(66, 13);
+            this.lblGen.TabIndex = 0;
+            this.lblGen.Text = "1. generáció";
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblGen);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label lblGen;
     }
 }
 
